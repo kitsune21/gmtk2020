@@ -58,10 +58,13 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+<<<<<<< HEAD
+=======
 /Temp/*
 
 
 *.backup
+>>>>>>> master
 Entry/Temp/UnityTempFile-fb49f35b04b5a774989cc1ec065bf609
 Entry/Temp/UnityTempFile-f14d5982965215c4b8ae3f61834c5df0
 Entry/Temp/UnityTempFile-ea31674d1139ab944861c39e7a9111ac
@@ -98,3 +101,8 @@ Entry/Temp/UnityTempFile-0d2e21f7167f3ff4aa6354b18608ae83
 Entry/Temp/UnityTempFile-046ca10860e7745458c493cfb7db8658
 Entry/Temp/UnityTempFile-040cbf15ec344064b9d375c2aa5f274d
 Entry/Temp/UnityLockfile
+<<<<<<< HEAD
+Entry/Temp/__Backupscenes/0.backup
+Entry/Library/SourceAssetDB-lock
+=======
+>>>>>>> master
