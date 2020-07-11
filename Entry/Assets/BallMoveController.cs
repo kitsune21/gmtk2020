@@ -8,6 +8,9 @@ public class BallMoveController : MonoBehaviour
     private Rigidbody2D rb;
     public float maxForce;
 
+    public bool ballHasStopped;
+    public bool ballIsHit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,12 +24,32 @@ public class BallMoveController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (ballIsHit)
+        {
+            if (rb.velocity.x <= 0 && rb.velocity.y <= 0)
+            {
+                ballHasStopped = true;
+                ballIsHit = false;
+            }
+        }
     }
 
     public void HitBall(Vector3 dir, float power)
     {
         float force = maxForce * power;
         rb.AddForce(dir * force, ForceMode2D.Impulse);
+        ballIsHit = true;
+    }
+
+    public bool getBallHasStopped()
+    {
+        if (ballHasStopped)
+        {
+            ballHasStopped = false;
+            return true;
+        } else
+        {
+            return ballHasStopped;
+        }
     }
 }
