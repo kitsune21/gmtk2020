@@ -58,6 +58,11 @@ public class PlayerController : MonoBehaviour
         }
         if (myBall.GetComponent<BallMoveController>().getBallHasStopped())
         {
+            if (myBall.GetComponent<BallMoveController>().getHitWater())
+            {
+                Vector3 waterPos = myBall.GetComponent<BallMoveController>().getNewWaterPos();
+                myBall.transform.position = waterPos;
+            }
             resetCharacter();
             rageMeter.GetComponent<RageMeterController>().addRage();
         }
@@ -104,7 +109,6 @@ public class PlayerController : MonoBehaviour
 
     private void resetCharacter()
     {
-        Debug.Log("test");
         disableInput = false;
         powerMeterDirection = 1;
         startPowerMeter = false;

@@ -20,7 +20,6 @@ public class HitGoal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log(col.gameObject.tag);
         if (col.gameObject.tag == "Ball")
         {
             SceneManager.LoadScene(nextScene);
