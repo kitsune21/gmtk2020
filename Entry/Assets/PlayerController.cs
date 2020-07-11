@@ -28,8 +28,15 @@ public class PlayerController : MonoBehaviour
     public int framesTillHit;
     public int framesTillHitCount;
 
-    public AudioClip[] sounds ;
+    public AudioClip[] sounds;
     private AudioSource audioSource;
+
+    public AudioClip defaultMusic;
+    public AudioClip rageMusic;
+    public AudioSource mainCameraAudio;
+
+    private bool rageInControl = false;
+    private int rageHitCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +44,9 @@ public class PlayerController : MonoBehaviour
         disableInput = false;
         myAnim = GetComponentInChildren<Animator>();
         audioSource = GetComponent<AudioSource>();
+        mainCameraAudio = GetComponent<AudioSource>();
+        mainCameraAudio.clip = defaultMusic;
+        mainCameraAudio.Play();
     }
 
     // Update is called once per frame
@@ -46,6 +56,15 @@ public class PlayerController : MonoBehaviour
         {
             if (!startPowerMeter)
             {
+                // if rage is full, set a random rotation for the player and hit the ball a random power
+                if (rageInControl)
+                {
+                    var euler = transform.eulerAngles;
+                    euler.z = Random.Range(0.0f, 360.0f);
+                    transform.eulerAngles = euler;
+                    powerMeter.value = Random.Range(0.5f, 1f);
+                    stopPowerMeter();
+                }
                 if (Input.GetKey(KeyCode.A))
                 {
                     transform.Rotate(0, 0, playerRotateAmount);
@@ -77,7 +96,22 @@ public class PlayerController : MonoBehaviour
                 Vector3 waterPos = myBall.GetComponent<BallMoveController>().getNewWaterPos();
                 myBall.transform.position = waterPos;
             }
-            rageMeter.GetComponent<RageMeterController>().addRage();
+            // don't increase rage if this was a rage move
+            if (!rageInControl)
+            {
+                rageMeter.GetComponent<RageMeterController>().addRage();
+            }
+            else
+            {
+                rageHitCount++;
+                if (rageHitCount == 3)
+                {
+                    rageHitCount = 0;
+                    rageInControl = false;
+                    mainCameraAudio.clip = defaultMusic;
+                    mainCameraAudio.Play();
+                }
+            }
             resetCharacter();
         }
         
@@ -151,10 +185,14 @@ public class PlayerController : MonoBehaviour
         transform.position = myBall.transform.position;
         myBall.transform.SetParent(transform, true);
         myAnim.SetTrigger("ResetToIdle");
-        if(rageMeter.GetComponent<RageMeterController>().getRageLevel() == 1f)
+        if(rageMeter.GetComponent<RageMeterController>().getRageLevel() == .3f)
         {
             myLives.GetComponent<ClubController>().playerDied();
             rageMeter.GetComponent<RageMeterController>().resetRage();
+            //change the music
+            mainCameraAudio.clip = rageMusic;
+            mainCameraAudio.Play();
+            rageInControl = true;
         }
     }
 
