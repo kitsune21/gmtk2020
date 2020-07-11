@@ -259,7 +259,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 103714291}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 52dafd962c88c114487cfcab48bafe00, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -950,9 +950,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d967023e257c6438c32d6fbaa0bf3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxForce: 3
+  maxForce: 5
   ballHasStopped: 0
   ballIsHit: 0
+  maxFrameCount: 0
 --- !u!50 &1152185564
 Rigidbody2D:
   serializedVersion: 4
@@ -1361,7 +1362,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2011120212}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 52dafd962c88c114487cfcab48bafe00, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
