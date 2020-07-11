@@ -14,20 +14,23 @@ public class PlayerController : MonoBehaviour
 
     public bool startPowerMeter;
 
+    public bool disableInput;
+
     private float powerMeterFinalValue;
 
     public GameObject myBall;
+    public GameObject tempBallParent;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        disableInput = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!startPowerMeter)
+        if (!disableInput)
         {
             if (Input.GetKey(KeyCode.A))
             {
@@ -50,6 +53,10 @@ public class PlayerController : MonoBehaviour
             }
         }
         updatePowerMeter();
+        if (myBall.GetComponent<BallMoveController>().getBallHasStopped())
+        {
+            resetCharacter();
+        }
     }
 
     private void updatePowerMeter()
@@ -71,6 +78,7 @@ public class PlayerController : MonoBehaviour
     private void stopPowerMeter()
     {
         startPowerMeter = false;
+        disableInput = true;
         powerMeterFinalValue = powerMeter.value;
         hitTheBall();
     }
@@ -78,14 +86,19 @@ public class PlayerController : MonoBehaviour
     private void hitTheBall()
     {
         myBall.GetComponent<BallMoveController>().HitBall(getRotation(), getPowerMeterValue());
+        myBall.transform.SetParent(tempBallParent.transform, true);
     }
 
     private void resetCharacter()
     {
+        Debug.Log("test");
+        disableInput = false;
         powerMeterDirection = 1;
         startPowerMeter = false;
         powerMeterFinalValue = 0;
         transform.rotation = new Quaternion(0, 0, 0, 0);
+        transform.position = myBall.transform.position;
+        myBall.transform.SetParent(transform, true);
     }
 
     public float getPowerMeterValue()
