@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float increasePowerMeterAmount;
     private int powerMeterDirection = 1;
 
+    public GameObject powerMeterObj;
     public Slider powerMeter;
     public GameObject rageMeter;
 
@@ -58,6 +59,9 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     startPowerMeter = true;
+                    powerMeterObj.SetActive(true);
+                    Vector3 pos = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
+                    powerMeterObj.transform.position = Camera.main.WorldToScreenPoint(pos);
                 }
             }
         }
@@ -119,6 +123,7 @@ public class PlayerController : MonoBehaviour
     {
         startPowerMeter = false;
         disableInput = true;
+        powerMeterObj.SetActive(false);
         powerMeterFinalValue = powerMeter.value;
         hitTheBall();
     }
