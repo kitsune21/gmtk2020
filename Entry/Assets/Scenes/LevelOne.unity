@@ -2005,42 +2005,27 @@ PrefabInstance:
     - target: {fileID: 3550836286158311272, guid: ed49d6ec89cd17949b375f8a0c1baae2,
         type: 3}
       propertyPath: maxForce
-      value: 5.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3550836286158311272, guid: ed49d6ec89cd17949b375f8a0c1baae2,
         type: 3}
       propertyPath: powerRageMultiplier
-      value: 4.2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3550836286158311272, guid: ed49d6ec89cd17949b375f8a0c1baae2,
         type: 3}
       propertyPath: ballIsHit
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3550836286158311273, guid: ed49d6ec89cd17949b375f8a0c1baae2,
+    - target: {fileID: 3550836286158311279, guid: ed49d6ec89cd17949b375f8a0c1baae2,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
+      propertyPath: m_LinearDrag
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 3550836286158311273, guid: ed49d6ec89cd17949b375f8a0c1baae2,
+    - target: {fileID: 3550836286158311279, guid: ed49d6ec89cd17949b375f8a0c1baae2,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3550836286211561398, guid: ed49d6ec89cd17949b375f8a0c1baae2,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: 767829465
-      objectReference: {fileID: 0}
-    - target: {fileID: 3550836286211561398, guid: ed49d6ec89cd17949b375f8a0c1baae2,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3550836286673885153, guid: ed49d6ec89cd17949b375f8a0c1baae2,
-        type: 3}
-      propertyPath: m_Name
-      value: GameObject
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed49d6ec89cd17949b375f8a0c1baae2, type: 3}
@@ -6381,7 +6366,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6472,7 +6457,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.9
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6737,7 +6722,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -25}
+  m_AnchoredPosition: {x: 110, y: -30}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2136694776

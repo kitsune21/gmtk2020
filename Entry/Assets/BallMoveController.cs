@@ -62,9 +62,8 @@ public class BallMoveController : MonoBehaviour
     public void HitBall(Vector3 dir, float power, float rage)
     {
         frameCount = 0;
-
-        float force = maxForce + ((power + rage) * powerRageMultiplier); 
-        //float force = (power * maxForce) + Mathf.Log(rage);
+        rage = (1 - (1 / (1 + Mathf.Exp(rage * 10 - 5))));
+        float force = ((power + rage) * powerRageMultiplier); 
         rb.AddForce(dir * force, ForceMode2D.Impulse);
         ballIsHit = true;
         audioSource.PlayOneShot(moveSound);
