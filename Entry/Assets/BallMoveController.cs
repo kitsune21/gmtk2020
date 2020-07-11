@@ -19,15 +19,18 @@ public class BallMoveController : MonoBehaviour
     public float powerRageMultiplier;
 
     public Vector3 newPosWater;
+    // sounds
+    public AudioClip wallSound;
+    public AudioClip cupSound;
+    public AudioClip moveSound;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         frameCount = 0;
-        // testing hitting from an angle, delete when we get player provided direction
-        //transform.rotation = Quaternion.Euler(0, 0, 170);
-        //HitBall(transform.right, actualForce);
+        audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -64,6 +67,7 @@ public class BallMoveController : MonoBehaviour
         //float force = (power * maxForce) + Mathf.Log(rage);
         rb.AddForce(dir * force, ForceMode2D.Impulse);
         ballIsHit = true;
+        audioSource.PlayOneShot(moveSound);
     }
 
     public bool getBallHasStopped()
@@ -113,5 +117,21 @@ public class BallMoveController : MonoBehaviour
     public void setHitWater()
     {
         hitWater = true;
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Wall")
+        {
+            audioSource.PlayOneShot(wallSound);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Goal")
+        {
+            audioSource.PlayOneShot(cupSound);
+        }
     }
 }
