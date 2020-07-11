@@ -47,7 +47,8 @@ public class BallMoveController : MonoBehaviour
         {
             ballHasStopped = false;
             return true;
-        } else
+        }
+        else
         {
             return ballHasStopped;
         }
