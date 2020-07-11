@@ -10,6 +10,14 @@
 /[Ll]ogs/
 /[Mm]emoryCaptures/
 
+Entry/Obj/
+Entry/Build/
+Entry/Builds/
+Entry/Logs/
+Entry/MemoryCaptures/
+Entry/Library/
+Entry/Temp/
+
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
 
@@ -58,31 +66,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-Entry/[Oo]bj/
-Entry/[Bb]uild/
-Entry/[Bb]uilds/
-Entry/[Ll]ogs/
-Entry/[Mm]emoryCaptures/
-Entry/[Ll]ibrary/
-Entry/[Tt]emp/
+*.log
 
-*.backup
-
-Entry/Library/SourceAssetDB-lock
-Entry/Library/ArtifactDB
-Entry/Library/SourceAssetDB-lock
-Entry/Library/ArtifactDB
-Entry/Library/Artifacts/Legacy/3a/3a2bb380ec41d424db78d5736ff0cf27.info
-Entry/Library/Artifacts/Legacy/40/40258371e6d4ab0419e96ea6abb23ea4.info
-Entry/Library/Artifacts/Legacy/95/9565c139b3e938547ac59a6d1db91f11.info
-Entry/Library/Artifacts/Legacy/a7/a71c0e674f20c4f438f3a86686ec4e01.info
-Entry/Library/Artifacts/Legacy/c2/c2bdccd02e0623148a810dc571102c5b.info
-Entry/Library/CurrentLayout-default.dwlt
-Entry/Library/EditorInstance.json
-Entry/Library/expandedItems
-Entry/Library/LastSceneManagerSetup.txt
-Entry/Library/ScriptAssemblies/Assembly-CSharp.dll
 Entry/Library/SourceAssetDB
-Entry/Library/StateCache/Hierarchy/0e154b-mainStage.json
-Entry/Library/StateCache/SceneView/3a7722-mainStage.json
-Entry/ProjectSettings/EditorBuildSettings.asset
