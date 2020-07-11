@@ -67,6 +67,10 @@ sysinfo.txt
 crashlytics-build.properties
 
 *.log
+<<<<<<< HEAD
+
+Entry/Library/SourceAssetDB
+=======
 Entry/Library/ArtifactDB
 Entry/Library/StateCache/SceneView/3a7722-mainStage.json
 Entry/Library/StateCache/Hierarchy/0e154b-mainStage.json
@@ -86,3 +90,4 @@ Entry/Library/SourceAssetDB
 Entry/Library/SourceAssetDB-lock
 Entry/ProjectSettings/EditorBuildSettings.asset
 Entry/Library/ArtifactDB
+>>>>>>> parent of 9b6f81b... Mud hazard, title screen
