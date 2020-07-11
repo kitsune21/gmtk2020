@@ -10,6 +10,14 @@
 /[Ll]ogs/
 /[Mm]emoryCaptures/
 
+/Entry/[Ll]ibrary/
+/Entry/[Tt]emp/
+/Entry/[Oo]bj/
+/Entry/[Bb]uild/
+/Entry/[Bb]uilds/
+/Entry/[Ll]ogs/
+/Entry/[Mm]emoryCaptures/
+
 Entry/Obj/
 Entry/Build/
 Entry/Builds/
