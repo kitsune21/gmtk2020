@@ -68,3 +68,6 @@ Entry/[Tt]emp/
 
 *.backup
 
+Entry/Library/SourceAssetDB-lock
+Entry/Library/ArtifactDB
+Entry/Library/SourceAssetDB-lock
