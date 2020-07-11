@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public GameObject powerMeterObj;
     public Slider powerMeter;
     public GameObject rageMeter;
+    public GameObject myLives;
 
     public bool startPowerMeter;
 
@@ -72,8 +73,8 @@ public class PlayerController : MonoBehaviour
                 Vector3 waterPos = myBall.GetComponent<BallMoveController>().getNewWaterPos();
                 myBall.transform.position = waterPos;
             }
-            resetCharacter();
             rageMeter.GetComponent<RageMeterController>().addRage();
+            resetCharacter();
         }
         
     }
@@ -96,7 +97,6 @@ public class PlayerController : MonoBehaviour
         }
         else if (framesTillHitCount == framesTillHit)
         {
-            Debug.Log("why");
             myBall.GetComponent<BallMoveController>().HitBall(getRotation(), getPowerMeterValue(), rageMeter.GetComponent<RageMeterController>().getRageLevel());
             myBall.transform.SetParent(tempBallParent.transform, true);
             framesTillHitCount += 1;
@@ -144,6 +144,11 @@ public class PlayerController : MonoBehaviour
         transform.position = myBall.transform.position;
         myBall.transform.SetParent(transform, true);
         myAnim.SetTrigger("ResetToIdle");
+        if(rageMeter.GetComponent<RageMeterController>().getRageLevel() == 1f)
+        {
+            myLives.GetComponent<ClubController>().playerDied();
+            rageMeter.GetComponent<RageMeterController>().resetRage();
+        }
     }
 
     public float getPowerMeterValue()

@@ -12,7 +12,6 @@ public class HitGoal : MonoBehaviour
         // find the starting point
         foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
         {
-            Debug.Log(go.tag);
             if (go.CompareTag("Respawn"))
             {
                 foreach (GameObject pl in GameObject.FindObjectsOfType(typeof(GameObject)))
