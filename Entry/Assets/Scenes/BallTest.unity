@@ -374,7 +374,9 @@ MonoBehaviour:
   increasePowerMeterAmount: 0.02
   powerMeter: {fileID: 2053825860}
   startPowerMeter: 0
-  myBall: {fileID: 0}
+  disableInput: 0
+  myBall: {fileID: 1152185559}
+  tempBallParent: {fileID: 1624968355}
 --- !u!1 &282092999
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,6 +951,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxForce: 3
+  ballHasStopped: 0
+  ballIsHit: 0
 --- !u!50 &1152185564
 Rigidbody2D:
   serializedVersion: 4
@@ -1081,6 +1085,36 @@ Transform:
   - {fileID: 2011120213}
   m_Father: {fileID: 76849124}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1624968355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1624968356}
+  m_Layer: 0
+  m_Name: Temp_Parent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1624968356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624968355}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.007696937, y: -0.12689203, z: -0.16451332}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1650977874
 GameObject:
