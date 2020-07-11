@@ -215,6 +215,7 @@ Transform:
   m_Children:
   - {fileID: 749119547}
   - {fileID: 1406603027}
+  - {fileID: 914958154}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -337,7 +338,7 @@ GameObject:
   - component: {fileID: 134263729}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -377,6 +378,75 @@ MonoBehaviour:
   disableInput: 0
   myBall: {fileID: 1152185559}
   tempBallParent: {fileID: 1624968355}
+--- !u!1001 &208719989
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 76849124}
+    m_Modifications:
+    - target: {fileID: 8231820270202384431, guid: 54eedebd7618a114987ccf19bb9ae6d1,
+        type: 3}
+      propertyPath: m_Name
+      value: Mud
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231820270202384430, guid: 54eedebd7618a114987ccf19bb9ae6d1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231820270202384430, guid: 54eedebd7618a114987ccf19bb9ae6d1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231820270202384430, guid: 54eedebd7618a114987ccf19bb9ae6d1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231820270202384430, guid: 54eedebd7618a114987ccf19bb9ae6d1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231820270202384430, guid: 54eedebd7618a114987ccf19bb9ae6d1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231820270202384430, guid: 54eedebd7618a114987ccf19bb9ae6d1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231820270202384430, guid: 54eedebd7618a114987ccf19bb9ae6d1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231820270202384430, guid: 54eedebd7618a114987ccf19bb9ae6d1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231820270202384430, guid: 54eedebd7618a114987ccf19bb9ae6d1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231820270202384430, guid: 54eedebd7618a114987ccf19bb9ae6d1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231820270202384430, guid: 54eedebd7618a114987ccf19bb9ae6d1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 54eedebd7618a114987ccf19bb9ae6d1, type: 3}
 --- !u!1 &282092999
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,6 +833,12 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &914958154 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8231820270202384430, guid: 54eedebd7618a114987ccf19bb9ae6d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 208719989}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &991259563
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,7 +929,7 @@ GameObject:
   - component: {fileID: 1152185563}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
