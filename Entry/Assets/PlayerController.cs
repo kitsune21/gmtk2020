@@ -32,24 +32,27 @@ public class PlayerController : MonoBehaviour
     {
         if (!disableInput)
         {
-            if (Input.GetKey(KeyCode.A))
+            if (!startPowerMeter)
             {
-                transform.Rotate(0, 0, playerRotateAmount);
+                if (Input.GetKey(KeyCode.A))
+                {
+                    transform.Rotate(0, 0, playerRotateAmount);
+                }
+                if (Input.GetKey(KeyCode.D))
+                {
+                    transform.Rotate(0, 0, -playerRotateAmount);
+                }
             }
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.W))
             {
-                transform.Rotate(0, 0, -playerRotateAmount);
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            if (startPowerMeter)
-            {
-                stopPowerMeter();
-            }
-            else
-            {
-                startPowerMeter = true;
+                if (startPowerMeter)
+                {
+                    stopPowerMeter();
+                }
+                else
+                {
+                    startPowerMeter = true;
+                }
             }
         }
         updatePowerMeter();
