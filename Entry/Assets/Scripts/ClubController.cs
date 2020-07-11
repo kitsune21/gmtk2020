@@ -33,6 +33,7 @@ public class ClubController : MonoBehaviour
                 if (life.GetComponent<LifeController>().getId() == nextID)
                 {
                     life.GetComponent<LifeController>().setIsGone();
+                    clubCount -= 1;
                 }
             }
         }
