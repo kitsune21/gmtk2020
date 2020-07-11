@@ -60,7 +60,8 @@ public class BallMoveController : MonoBehaviour
     {
         frameCount = 0;
 
-        float force = maxForce * ((power + rage) * powerRageMultiplier);
+        float force = maxForce + ((power + rage) * powerRageMultiplier); 
+        //float force = (power * maxForce) + Mathf.Log(rage);
         rb.AddForce(dir * force, ForceMode2D.Impulse);
         ballIsHit = true;
     }

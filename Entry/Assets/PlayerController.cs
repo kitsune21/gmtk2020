@@ -22,10 +22,15 @@ public class PlayerController : MonoBehaviour
     public GameObject myBall;
     public GameObject tempBallParent;
 
+    private Animator myAnim;
+    public int framesTillHit;
+    public int framesTillHitCount;
+
     // Start is called before the first frame update
     void Start()
     {
         disableInput = false;
+        myAnim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -66,6 +71,7 @@ public class PlayerController : MonoBehaviour
             resetCharacter();
             rageMeter.GetComponent<RageMeterController>().addRage();
         }
+        
     }
 
     private void LateUpdate()
@@ -75,6 +81,22 @@ public class PlayerController : MonoBehaviour
             Application.Quit();
         }
         updatePowerMeter();
+        waitFramesTillHittingBall();
+    }
+
+    private void waitFramesTillHittingBall()
+    {
+        if (framesTillHitCount < framesTillHit)
+        {
+            framesTillHitCount += 1;
+        }
+        else if (framesTillHitCount == framesTillHit)
+        {
+            Debug.Log("why");
+            myBall.GetComponent<BallMoveController>().HitBall(getRotation(), getPowerMeterValue(), rageMeter.GetComponent<RageMeterController>().getRageLevel());
+            myBall.transform.SetParent(tempBallParent.transform, true);
+            framesTillHitCount += 1;
+        }
     }
 
     private void updatePowerMeter()
@@ -103,8 +125,8 @@ public class PlayerController : MonoBehaviour
 
     private void hitTheBall()
     {
-        myBall.GetComponent<BallMoveController>().HitBall(getRotation(), getPowerMeterValue(), rageMeter.GetComponent<RageMeterController>().getRageLevel());
-        myBall.transform.SetParent(tempBallParent.transform, true);
+        myAnim.SetTrigger("SwingInit");
+        framesTillHitCount = 0;
     }
 
     private void resetCharacter()
@@ -116,6 +138,7 @@ public class PlayerController : MonoBehaviour
         transform.rotation = new Quaternion(0, 0, 0, 0);
         transform.position = myBall.transform.position;
         myBall.transform.SetParent(transform, true);
+        myAnim.SetTrigger("ResetToIdle");
     }
 
     public float getPowerMeterValue()
@@ -125,6 +148,6 @@ public class PlayerController : MonoBehaviour
 
     public Vector3 getRotation()
     {
-        return transform.up;
+        return -transform.up;
     }
 }
