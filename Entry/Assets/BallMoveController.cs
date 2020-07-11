@@ -11,10 +11,14 @@ public class BallMoveController : MonoBehaviour
     public bool ballHasStopped;
     public bool ballIsHit;
 
+    private int frameCount;
+    public int maxFrameCount;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        frameCount = 0;
         // testing hitting from an angle, delete when we get player provided direction
         //transform.rotation = Quaternion.Euler(0, 0, 170);
         //HitBall(transform.right, actualForce);
@@ -22,20 +26,30 @@ public class BallMoveController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (ballIsHit)
         {
-            if (rb.velocity.x <= 0 && rb.velocity.y <= 0)
+            if (rb.velocity.x == 0 && rb.velocity.y == 0)
             {
-                ballHasStopped = true;
-                ballIsHit = false;
+                if(frameCount >= maxFrameCount)
+                {
+                    if (rb.velocity.x == 0 && rb.velocity.y == 0)
+                    {
+                        ballHasStopped = true;
+                        ballIsHit = false;
+                        frameCount = 0;
+                    }
+                }
+                frameCount += 1;
             }
         }
     }
 
     public void HitBall(Vector3 dir, float power)
     {
+        frameCount = 0;
+
         float force = maxForce * power;
         rb.AddForce(dir * force, ForceMode2D.Impulse);
         ballIsHit = true;
