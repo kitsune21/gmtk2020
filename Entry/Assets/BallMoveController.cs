@@ -25,13 +25,14 @@ public class BallMoveController : MonoBehaviour
     public AudioClip moveSound;
     private AudioSource audioSource;
 
+    public Vector3 posBeforeHit;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         frameCount = 0;
         audioSource = GetComponent<AudioSource>();
-
     }
 
     // Update is called once per frame
@@ -49,6 +50,9 @@ public class BallMoveController : MonoBehaviour
                         if (hitWater)
                         {
                             inWaterStopped = true;
+                        } else
+                        {
+                            posBeforeHit = transform.position;
                         }
                         ballIsHit = false;
                         frameCount = 0;
@@ -61,6 +65,7 @@ public class BallMoveController : MonoBehaviour
 
     public void HitBall(Vector3 dir, float power, float rage)
     {
+        posBeforeHit = transform.position;
         frameCount = 0;
         rage = (1 - (1 / (1 + Mathf.Exp(rage * 10 - 5))));
         float force = ((power + rage) * powerRageMultiplier); 
@@ -99,18 +104,12 @@ public class BallMoveController : MonoBehaviour
     public void resetHitWater()
     {
         inWaterStopped = false;
-    }
-
-    public void setNewPositionWater(Vector3 newPos)
-    {
-        newPosWater = newPos;
+        hitWater = false;
     }
 
     public Vector3 getNewWaterPos()
     {
-        Vector3 tempPos = newPosWater;
-        newPosWater = new Vector3(0, 0, 0);
-        return tempPos;
+        return posBeforeHit;
     }
 
     public void setHitWater()

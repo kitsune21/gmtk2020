@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
         disableInput = false;
         myAnim = GetComponentInChildren<Animator>();
         audioSource = GetComponent<AudioSource>();
+        resetCharacter();
     }
 
     // Update is called once per frame
