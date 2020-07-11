@@ -374,6 +374,7 @@ MonoBehaviour:
   increasePowerMeterAmount: 0.02
   powerMeter: {fileID: 2053825860}
   startPowerMeter: 0
+  myBall: {fileID: 0}
 --- !u!1 &282092999
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,8 +948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d967023e257c6438c32d6fbaa0bf3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxForce: 0
-  actualForce: 0
+  maxForce: 3
 --- !u!50 &1152185564
 Rigidbody2D:
   serializedVersion: 4
