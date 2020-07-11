@@ -10,13 +10,13 @@
 /[Ll]ogs/
 /[Mm]emoryCaptures/
 
-Entry/[Oo]bj/
-Entry/[Bb]uild/
-Entry/[Bb]uilds/
-Entry/[Ll]ogs/
-Entry/[Mm]emoryCaptures/
-Entry/[Ll]ibrary/
-Entry/[Tt]emp/
+Entry/Obj/
+Entry/Build/
+Entry/Builds/
+Entry/Logs/
+Entry/MemoryCaptures/
+Entry/Library/
+Entry/Temp/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -66,6 +66,23 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-/Temp/*
-
-
+*.log
+Entry/Library/ArtifactDB
+Entry/Library/StateCache/SceneView/3a7722-mainStage.json
+Entry/Library/StateCache/Hierarchy/0e154b-mainStage.json
+Entry/Library/SourceAssetDB-lock
+Entry/Library/SourceAssetDB
+*.log
+Entry/Library/SourceAssetDB-lock
+Entry/Library/SourceAssetDB
+Entry/Library/shadercompiler-UnityShaderCompiler.exe2.log
+Entry/Library/shadercompiler-UnityShaderCompiler.exe1.log
+Entry/Library/shadercompiler-UnityShaderCompiler.exe0.log
+Entry/Library/ArtifactDB
+Entry/Library/SourceAssetDB
+Entry/Library/SourceAssetDB-lock
+Entry/Library/ArtifactDB
+Entry/Library/SourceAssetDB
+Entry/Library/SourceAssetDB-lock
+Entry/ProjectSettings/EditorBuildSettings.asset
+Entry/Library/ArtifactDB

@@ -374,8 +374,12 @@ MonoBehaviour:
   increasePowerMeterAmount: 0.015
   powerMeter: {fileID: 2053825860}
   startPowerMeter: 0
+<<<<<<< HEAD
   myBall: {fileID: 1152185559}
   tempBallParent: {fileID: 1084853266}
+=======
+  myBall: {fileID: 0}
+>>>>>>> hit-ball
 --- !u!1 &282092999
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,9 +982,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d967023e257c6438c32d6fbaa0bf3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   maxForce: 5
   ballHasStopped: 0
   ballIsHit: 0
+=======
+  maxForce: 3
+>>>>>>> hit-ball
 --- !u!50 &1152185564
 Rigidbody2D:
   serializedVersion: 4
