@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private int powerMeterDirection = 1;
 
     public Slider powerMeter;
+    public GameObject rageMeter;
 
     public bool startPowerMeter;
 
@@ -55,10 +56,10 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        updatePowerMeter();
         if (myBall.GetComponent<BallMoveController>().getBallHasStopped())
         {
             resetCharacter();
+            rageMeter.GetComponent<RageMeterController>().addRage();
         }
     }
 
@@ -68,6 +69,7 @@ public class PlayerController : MonoBehaviour
         {
             Application.Quit();
         }
+        updatePowerMeter();
     }
 
     private void updatePowerMeter()
@@ -96,7 +98,7 @@ public class PlayerController : MonoBehaviour
 
     private void hitTheBall()
     {
-        myBall.GetComponent<BallMoveController>().HitBall(getRotation(), getPowerMeterValue());
+        myBall.GetComponent<BallMoveController>().HitBall(getRotation(), getPowerMeterValue(), rageMeter.GetComponent<RageMeterController>().getRageLevel());
         myBall.transform.SetParent(tempBallParent.transform, true);
     }
 

@@ -14,6 +14,8 @@ public class BallMoveController : MonoBehaviour
     private int frameCount;
     public int maxFrameCount;
 
+    public float powerRageMultiplier;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,11 +48,11 @@ public class BallMoveController : MonoBehaviour
         }
     }
 
-    public void HitBall(Vector3 dir, float power)
+    public void HitBall(Vector3 dir, float power, float rage)
     {
         frameCount = 0;
 
-        float force = maxForce * power;
+        float force = maxForce * ((power + rage) * powerRageMultiplier);
         rb.AddForce(dir * force, ForceMode2D.Impulse);
         ballIsHit = true;
     }
