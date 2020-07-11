@@ -28,11 +28,15 @@ public class PlayerController : MonoBehaviour
     public int framesTillHit;
     public int framesTillHitCount;
 
+    public AudioClip[] sounds ;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
         disableInput = false;
         myAnim = GetComponentInChildren<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -132,6 +136,9 @@ public class PlayerController : MonoBehaviour
     {
         myAnim.SetTrigger("SwingInit");
         framesTillHitCount = 0;
+
+        // play a random grunt when the player hits the ball
+        audioSource.PlayOneShot(sounds[Random.Range(0, sounds.Length)]);
     }
 
     private void resetCharacter()
