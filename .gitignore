@@ -67,3 +67,5 @@ sysinfo.txt
 crashlytics-build.properties
 
 *.log
+
+Entry/Library/SourceAssetDB
