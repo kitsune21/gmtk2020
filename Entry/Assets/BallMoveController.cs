@@ -10,11 +10,15 @@ public class BallMoveController : MonoBehaviour
 
     public bool ballHasStopped;
     public bool ballIsHit;
+    private bool hitWater;
+    private bool inWaterStopped;
 
     private int frameCount;
     public int maxFrameCount;
 
     public float powerRageMultiplier;
+
+    public Vector3 newPosWater;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +43,10 @@ public class BallMoveController : MonoBehaviour
                     if (rb.velocity.x == 0 && rb.velocity.y == 0)
                     {
                         ballHasStopped = true;
+                        if (hitWater)
+                        {
+                            inWaterStopped = true;
+                        }
                         ballIsHit = false;
                         frameCount = 0;
                     }
@@ -68,5 +76,41 @@ public class BallMoveController : MonoBehaviour
         {
             return ballHasStopped;
         }
+    }
+
+    public bool getHitWater()
+    {
+        if (inWaterStopped)
+        {
+            inWaterStopped = false;
+            hitWater = false;
+            return true;
+        }
+        else
+        {
+            return inWaterStopped;
+        }
+    }
+
+    public void resetHitWater()
+    {
+        inWaterStopped = false;
+    }
+
+    public void setNewPositionWater(Vector3 newPos)
+    {
+        newPosWater = newPos;
+    }
+
+    public Vector3 getNewWaterPos()
+    {
+        Vector3 tempPos = newPosWater;
+        newPosWater = new Vector3(0, 0, 0);
+        return tempPos;
+    }
+
+    public void setHitWater()
+    {
+        hitWater = true;
     }
 }
