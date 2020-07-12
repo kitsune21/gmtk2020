@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public bool startPowerMeter;
 
     public bool disableInput;
+    public bool waitToStart;
 
     private float powerMeterFinalValue;
 
@@ -38,6 +39,24 @@ public class PlayerController : MonoBehaviour
     private bool rageInControl = false;
     private int rageHitCount = 0;
 
+    public GameObject strokeController;
+    public GameObject strokeCardPanel;
+
+    private int strokesCount;
+
+    public GameObject relaxMeter;
+    private bool startRelax;
+    private int relaxMeterDirection;
+    private int relaxAmount;
+    private float returnRelaxAmount;
+
+    public GameObject calmDownPanel;
+    public Text calmDownText;
+
+    public float secondsTillCalmDone;
+    public float secondsTillCalmDoneMax;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,40 +71,43 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!disableInput)
+        if (!waitToStart)
         {
-            if (!startPowerMeter)
+            if (!disableInput)
             {
-                // if rage is full, set a random rotation for the player and hit the ball a random power
-                if (rageInControl)
+                if (!startPowerMeter)
                 {
-                    var euler = transform.eulerAngles;
-                    euler.z = Random.Range(0.0f, 360.0f);
-                    transform.eulerAngles = euler;
-                    powerMeter.value = Random.Range(0.5f, 1f);
-                    stopPowerMeter();
+                    // if rage is full, set a random rotation for the player and hit the ball a random power
+                    if (rageInControl)
+                    {
+                        var euler = transform.eulerAngles;
+                        euler.z = Random.Range(0.0f, 360.0f);
+                        transform.eulerAngles = euler;
+                        powerMeter.value = Random.Range(0.5f, 1f);
+                        stopPowerMeter();
+                    }
+                    if (Input.GetKey(KeyCode.A))
+                    {
+                        transform.Rotate(0, 0, playerRotateAmount);
+                    }
+                    if (Input.GetKey(KeyCode.D))
+                    {
+                        transform.Rotate(0, 0, -playerRotateAmount);
+                    }
                 }
-                if (Input.GetKey(KeyCode.A))
+                if (Input.GetKeyDown(KeyCode.W))
                 {
-                    transform.Rotate(0, 0, playerRotateAmount);
-                }
-                if (Input.GetKey(KeyCode.D))
-                {
-                    transform.Rotate(0, 0, -playerRotateAmount);
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                if (startPowerMeter)
-                {
-                    stopPowerMeter();
-                }
-                else
-                {
-                    startPowerMeter = true;
-                    powerMeterObj.SetActive(true);
-                    Vector3 pos = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
-                    powerMeterObj.transform.position = Camera.main.WorldToScreenPoint(pos);
+                    if (startPowerMeter)
+                    {
+                        stopPowerMeter();
+                    }
+                    else
+                    {
+                        startPowerMeter = true;
+                        powerMeterObj.SetActive(true);
+                        Vector3 pos = new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z);
+                        powerMeterObj.transform.position = Camera.main.WorldToScreenPoint(pos);
+                    }
                 }
             }
         }
@@ -114,7 +136,6 @@ public class PlayerController : MonoBehaviour
             }
             resetCharacter();
         }
-        
     }
 
     private void LateUpdate()
@@ -124,6 +145,18 @@ public class PlayerController : MonoBehaviour
             Application.Quit();
         }
         updatePowerMeter();
+        updateRelaxMeter();
+        if(secondsTillCalmDone < secondsTillCalmDoneMax)
+        {
+            secondsTillCalmDone += Time.deltaTime;
+        } else if(calmDownPanel.activeSelf)
+        {
+            if(secondsTillCalmDone >= secondsTillCalmDoneMax)
+            {
+                calmDownPanel.SetActive(false);
+                secondsTillCalmDone = 10000;
+            }
+        }
         waitFramesTillHittingBall();
     }
 
@@ -171,6 +204,8 @@ public class PlayerController : MonoBehaviour
         myAnim.SetTrigger("SwingInit");
         framesTillHitCount = 0;
 
+        strokesCount += 1;
+
         // play a random grunt when the player hits the ball
         audioSource.PlayOneShot(sounds[Random.Range(0, sounds.Length)]);
     }
@@ -194,6 +229,7 @@ public class PlayerController : MonoBehaviour
             mainCameraAudio.Play();
             rageInControl = true;
         }
+        powerMeter.value = 0;
     }
 
     public float getPowerMeterValue()
@@ -204,5 +240,64 @@ public class PlayerController : MonoBehaviour
     public Vector3 getRotation()
     {
         return -transform.up;
+    }
+
+    public void gotTheHole()
+    {
+        strokeController.SetActive(true);
+        strokeCardPanel.SetActive(true);
+        strokeController.GetComponent<ScoreCard>().addScore(strokesCount);
+        waitToStart = true;
+    }
+
+    public void startHole()
+    {
+        waitToStart = false;
+        strokesCount = 0;
+        startRelaxMeter();
+    }
+
+    public void startRelaxMeter()
+    {
+        relaxMeter.SetActive(true);
+        startRelax = true;
+        strokeCardPanel.SetActive(false);
+
+    }
+    private void updateRelaxMeter()
+    {
+        if (startRelax)
+        {
+            relaxMeter.GetComponentInChildren<Slider>().value += (float)relaxMeterDirection * increasePowerMeterAmount;
+            if (relaxMeter.GetComponentInChildren<Slider>().value >= 3.2f)
+            {
+                relaxMeterDirection = -1;
+            }
+            else if (relaxMeter.GetComponentInChildren<Slider>().value <= 1)
+            {
+                relaxMeterDirection = 1;
+            }
+        }
+    }
+    public void stopRelax()
+    {
+        startRelax = false;
+        relaxAmount = (int)relaxMeter.GetComponentInChildren<Slider>().value;
+        returnRelaxAmount = 0;
+        if(relaxAmount == 3)
+        {
+            returnRelaxAmount = 0.3f;
+        } else if(relaxAmount == 2)
+        {
+            returnRelaxAmount = 0.2f;
+        } else if(relaxAmount == 1)
+        {
+            returnRelaxAmount = 0.1f;
+        }
+        rageMeter.GetComponent<RageMeterController>().reduceRage(returnRelaxAmount);
+        strokeController.SetActive(false);
+        calmDownPanel.SetActive(true);
+        calmDownText.text = "Calmed Down: " + relaxAmount.ToString();
+        secondsTillCalmDone = 0;
     }
 }

@@ -131,6 +131,7 @@ public class BallMoveController : MonoBehaviour
         if (col.gameObject.tag == "Goal")
         {
             audioSource.PlayOneShot(cupSound);
+
         }
     }
 }

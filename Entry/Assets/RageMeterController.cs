@@ -50,8 +50,8 @@ public class RageMeterController : MonoBehaviour
         currentFace.sprite = face1;
     }
 
-    public void reduceRage()
+    public void reduceRage(float decreaseAmount)
     {
-        rageMeter.value -= rageIncrementAmount;
+        rageMeter.value -= decreaseAmount;
     }
 }
