@@ -3285,7 +3285,7 @@ PrefabInstance:
         type: 3}
       propertyPath: rageMusic
       value: 
-      objectReference: {fileID: 8300000, guid: 38a2fbe7a787c464d9e588a417a9e270, type: 3}
+      objectReference: {fileID: 8300000, guid: abc3a5b5646804b438de92cb82141bbd, type: 3}
     - target: {fileID: 3550836287309400066, guid: ed49d6ec89cd17949b375f8a0c1baae2,
         type: 3}
       propertyPath: defaultMusic
@@ -3366,6 +3366,11 @@ PrefabInstance:
       propertyPath: rageInstructions
       value: 
       objectReference: {fileID: 24864794}
+    - target: {fileID: 3550836287309400066, guid: ed49d6ec89cd17949b375f8a0c1baae2,
+        type: 3}
+      propertyPath: rageInitYell
+      value: 
+      objectReference: {fileID: 8300000, guid: d34e5c41c1b0a6246911b509557f855f, type: 3}
     - target: {fileID: 3550836286158311272, guid: ed49d6ec89cd17949b375f8a0c1baae2,
         type: 3}
       propertyPath: maxForce

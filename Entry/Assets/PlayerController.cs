@@ -313,7 +313,7 @@ public class PlayerController : MonoBehaviour
         transform.position = myBall.transform.position;
         myBall.transform.SetParent(transform, true);
         myAnim.SetTrigger("ResetToIdle");
-        if(rageMeter.GetComponent<RageMeterController>().getRageLevel() == 1f)
+        if(rageMeter.GetComponent<RageMeterController>().getRageLevel() == .3f)
         {
             int livesCount = myLives.GetComponent<ClubController>().playerDied();
             if (livesCount <= 0)
@@ -321,7 +321,7 @@ public class PlayerController : MonoBehaviour
                 // end the game
                 SceneManager.LoadScene("GameOver");
             }
-            else
+            else if (!rageInControl)
             {
                 //change the music
                 mainCameraAudio.clip = rageMusic;
