@@ -315,7 +315,7 @@ public class PlayerController : MonoBehaviour
         myAnim.SetTrigger("ResetToIdle");
         if (!rageInControl)
         {
-            if (rageMeter.GetComponent<RageMeterController>().getRageLevel() >= .1f)
+            if (rageMeter.GetComponent<RageMeterController>().getRageLevel() >= 1f)
             {
                 int livesCount = myLives.GetComponent<ClubController>().playerDied();
                 if (livesCount <= 0)
