@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -281,13 +282,21 @@ public class PlayerController : MonoBehaviour
         myAnim.SetTrigger("ResetToIdle");
         if(rageMeter.GetComponent<RageMeterController>().getRageLevel() == 1f)
         {
-            myLives.GetComponent<ClubController>().playerDied();
-            rageMeter.GetComponent<RageMeterController>().resetRage();
-            //change the music
-            mainCameraAudio.clip = rageMusic;
-            mainCameraAudio.Play();
-            audioSource.PlayOneShot(rageInitYell);
-            rageInControl = true;
+            int livesCount = myLives.GetComponent<ClubController>().playerDied();
+            if (livesCount <= 0)
+            {
+                // end the game
+                SceneManager.LoadScene("GameOver");
+            }
+            else
+            {
+                rageMeter.GetComponent<RageMeterController>().resetRage();
+                //change the music
+                mainCameraAudio.clip = rageMusic;
+                mainCameraAudio.Play();
+                audioSource.PlayOneShot(rageInitYell);
+                rageInControl = true;
+            }
         }
         powerMeter.value = 0;
     }
