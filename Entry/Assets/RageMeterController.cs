@@ -39,8 +39,8 @@ public class RageMeterController : MonoBehaviour
     public void addRage()
     {
         rageMeter.value += rageIncrementAmount;
-        int faceIndex = (int)(rageMeter.value * 10) / 2;
 
+        int faceIndex = (int)(rageMeter.value * 10) / 2;
         currentFace.sprite = myFacesList[rageMeter.value >= 0.9f ? 4 : faceIndex];
     }
 

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4702046028756786911}
   m_Layer: 0
   m_Name: Mud
-  m_TagString: Untagged
+  m_TagString: Mud
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4702046028756786907}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.8, z: 0}
-  m_LocalScale: {x: 4.6, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -46,18 +46,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0015875101, y: 0.000072956085}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.39, y: 0.39}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.39, y: 0.39}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3872376, y: 0.3864565}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &4702046028756786905
 SpriteRenderer:
@@ -97,7 +97,7 @@ SpriteRenderer:
   m_SortingLayerID: -1875726625
   m_SortingLayer: 1
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: a53c4db27d8ac6f43abb5bf0f685196e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 53520ecf54ab80e4db03cbe10c560261, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
