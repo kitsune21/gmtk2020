@@ -11,11 +11,13 @@ public class HitGoal : MonoBehaviour
 
     private GameObject parentContainer;
     private GameObject myBall;
+    private AudioSource audioSource;
 
     public string nextScene;
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         // find the starting point
         foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
         {
@@ -65,6 +67,7 @@ public class HitGoal : MonoBehaviour
     {
         if (col.gameObject.tag == "Ball")
         {
+            audioSource.Play();
             // this holds the canvas and other objects
             parentContainer = col.gameObject.transform.parent.gameObject.transform.parent.gameObject;
             startTimer = true;

@@ -21,7 +21,6 @@ public class BallMoveController : MonoBehaviour
     public Vector3 newPosWater;
     // sounds
     public AudioClip wallSound;
-    public AudioClip cupSound;
     public AudioClip moveSound;
     private AudioSource audioSource;
 
@@ -128,15 +127,6 @@ public class BallMoveController : MonoBehaviour
         if (col.gameObject.tag == "Wall")
         {
             audioSource.PlayOneShot(wallSound);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "Goal")
-        {
-            audioSource.PlayOneShot(cupSound);
-
         }
     }
 }
