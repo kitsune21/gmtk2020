@@ -228,7 +228,7 @@ public class PlayerController : MonoBehaviour
         transform.position = myBall.transform.position;
         myBall.transform.SetParent(transform, true);
         myAnim.SetTrigger("ResetToIdle");
-        if(rageMeter.GetComponent<RageMeterController>().getRageLevel() == .3f)
+        if(rageMeter.GetComponent<RageMeterController>().getRageLevel() == 1f)
         {
             myLives.GetComponent<ClubController>().playerDied();
             rageMeter.GetComponent<RageMeterController>().resetRage();
@@ -253,6 +253,7 @@ public class PlayerController : MonoBehaviour
 
     public void gotTheHole()
     {
+        rageMeter.GetComponent<RageMeterController>().reduceRage(0.1f);
         strokeController.SetActive(true);
         strokeCardPanel.SetActive(true);
         strokeController.GetComponent<ScoreCard>().addScore(strokesCount);
@@ -290,6 +291,7 @@ public class PlayerController : MonoBehaviour
     }
     public void stopRelax()
     {
+        relaxMeter.SetActive(false);
         startRelax = false;
         relaxAmount = (int)relaxMeter.GetComponentInChildren<Slider>().value;
         returnRelaxAmount = 0;
