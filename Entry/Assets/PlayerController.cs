@@ -64,6 +64,16 @@ public class PlayerController : MonoBehaviour
     private Vector3 newCamPos;
     private bool moveCamera;
 
+    public GameObject displayControls;
+    private bool firstHit;
+    public float numOfFramesTillControlsGo;
+    public float numOfFramesTillControlsGoMax;
+    private Image[] panelsList;
+    private Color newColor;
+
+    public GameObject rageInstructions;
+    private int holeCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +84,11 @@ public class PlayerController : MonoBehaviour
         mainCameraAudio.clip = defaultMusic;
         mainCameraAudio.loop = true;
         mainCameraAudio.Play();
+        displayControls.SetActive(true);
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        displayControls.transform.position = Camera.main.WorldToScreenPoint(pos);
+        panelsList = displayControls.GetComponentsInChildren<Image>();
+        newColor = new Color(panelsList[0].color.r, panelsList[0].color.g, panelsList[0].color.b, panelsList[0].color.a);
     }
 
     // Update is called once per frame
@@ -162,6 +177,7 @@ public class PlayerController : MonoBehaviour
                     mainCameraAudio.clip = defaultMusic;
                     mainCameraAudio.loop = true;
                     mainCameraAudio.Play();
+                    rageMeter.GetComponent<RageMeterController>().resetRage();
                 }
             }
             resetCharacter();
@@ -189,6 +205,19 @@ public class PlayerController : MonoBehaviour
         }
         waitFramesTillHittingBall();
         lerpCamera();
+        if (numOfFramesTillControlsGo < numOfFramesTillControlsGoMax)
+        {
+            numOfFramesTillControlsGo++;
+            newColor = new Color(newColor.r, newColor.g, newColor.b, newColor.a - 0.001f);
+            foreach(Image panel in panelsList)
+            {
+                panel.color = newColor;
+            }
+        }
+        if(numOfFramesTillControlsGo >= numOfFramesTillControlsGoMax)
+        {
+            displayControls.SetActive(false);
+        }
     }
 
     private void waitFramesTillHittingBall()
@@ -225,6 +254,7 @@ public class PlayerController : MonoBehaviour
                 mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, new Vector3(0, 0, mainCamera.transform.position.z), 1);
                 lerpTimer = 10000;
                 moveCamera = false;
+                lerpRange = 0.1f;
             }
         }
     }
@@ -282,12 +312,12 @@ public class PlayerController : MonoBehaviour
         if(rageMeter.GetComponent<RageMeterController>().getRageLevel() == 1f)
         {
             myLives.GetComponent<ClubController>().playerDied();
-            rageMeter.GetComponent<RageMeterController>().resetRage();
             //change the music
             mainCameraAudio.clip = rageMusic;
             mainCameraAudio.Play();
             audioSource.PlayOneShot(rageInitYell);
             rageInControl = true;
+
         }
         powerMeter.value = 0;
     }
@@ -315,6 +345,14 @@ public class PlayerController : MonoBehaviour
     {
         waitToStart = false;
         strokesCount = 0;
+        holeCount++;
+        if(holeCount == 1)
+        {
+            rageInstructions.SetActive(true);
+        } else
+        {
+            rageInstructions.SetActive(false);
+        }
         startRelaxMeter();
     }
 
@@ -329,7 +367,7 @@ public class PlayerController : MonoBehaviour
     {
         if (startRelax)
         {
-            relaxMeter.GetComponentInChildren<Slider>().value += (float)relaxMeterDirection * increasePowerMeterAmount;
+            relaxMeter.GetComponentInChildren<Slider>().value += (float)relaxMeterDirection * (increasePowerMeterAmount + 0.05f);
             if (relaxMeter.GetComponentInChildren<Slider>().value >= relaxMeter.GetComponentInChildren<Slider>().maxValue)
             {
                 relaxMeterDirection = -1;
@@ -361,5 +399,6 @@ public class PlayerController : MonoBehaviour
         calmDownPanel.SetActive(true);
         calmDownText.text = "Calmed Down: " + relaxAmount.ToString();
         secondsTillCalmDone = 0;
+        mainCamera = Camera.main;
     }
 }
