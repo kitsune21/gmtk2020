@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         mainCameraAudio = GetComponent<AudioSource>();
         mainCameraAudio.clip = defaultMusic;
+        mainCameraAudio.loop = true;
         mainCameraAudio.Play();
     }
 
@@ -123,6 +124,8 @@ public class PlayerController : MonoBehaviour
             if (!rageInControl)
             {
                 rageMeter.GetComponent<RageMeterController>().addRage();
+                // play a random grunt when the ball stops
+                audioSource.PlayOneShot(sounds[Random.Range(0, sounds.Length)]);
             }
             else
             {
@@ -132,6 +135,7 @@ public class PlayerController : MonoBehaviour
                     rageHitCount = 0;
                     rageInControl = false;
                     mainCameraAudio.clip = defaultMusic;
+                    mainCameraAudio.loop = true;
                     mainCameraAudio.Play();
                 }
             }
@@ -213,9 +217,6 @@ public class PlayerController : MonoBehaviour
         framesTillHitCount = 0;
 
         strokesCount += 1;
-
-        // play a random grunt when the player hits the ball
-        audioSource.PlayOneShot(sounds[Random.Range(0, sounds.Length)]);
     }
 
     private void resetCharacter()
