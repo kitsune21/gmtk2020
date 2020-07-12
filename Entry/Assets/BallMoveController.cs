@@ -27,6 +27,8 @@ public class BallMoveController : MonoBehaviour
 
     public Vector3 posBeforeHit;
 
+    public Camera mainCamera;
+
 
     // Start is called before the first frame update
     void Start()
@@ -51,10 +53,7 @@ public class BallMoveController : MonoBehaviour
                         if (hitWater)
                         {
                             inWaterStopped = true;
-                        } else
-                        {
-                            posBeforeHit = transform.position;
-                        }
+                        } 
                         ballIsHit = false;
                         frameCount = 0;
                     }
@@ -73,6 +72,7 @@ public class BallMoveController : MonoBehaviour
         rb.AddForce(dir * force, ForceMode2D.Impulse);
         ballIsHit = true;
         audioSource.PlayOneShot(moveSound);
+        
     }
 
     public bool getBallHasStopped()
@@ -98,7 +98,7 @@ public class BallMoveController : MonoBehaviour
         }
         else
         {
-            return inWaterStopped;
+            return hitWater;
         }
     }
 
@@ -118,6 +118,11 @@ public class BallMoveController : MonoBehaviour
         hitWater = true;
     }
 
+    public bool checkHitWater()
+    {
+        return hitWater;
+    }
+
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Wall")
@@ -131,6 +136,7 @@ public class BallMoveController : MonoBehaviour
         if (col.gameObject.tag == "Goal")
         {
             audioSource.PlayOneShot(cupSound);
+
         }
     }
 }
