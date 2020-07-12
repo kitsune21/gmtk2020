@@ -432,7 +432,7 @@ GameObject:
   - component: {fileID: 1447571591605166924}
   m_Layer: 0
   m_Name: Player_Controller
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -482,6 +482,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ba37599af22d2a64b805e7c5d7f0d8e4, type: 3}
   - {fileID: 8300000, guid: 63bd17bd48c35a14e8905c33d757d5f9, type: 3}
   - {fileID: 8300000, guid: 10d101b7a8fc9a14fac173a27942e91e, type: 3}
+  defaultMusic: {fileID: 0}
+  rageMusic: {fileID: 0}
+  mainCameraAudio: {fileID: 0}
+  strokeController: {fileID: 0}
 --- !u!82 &1447571591605166924
 AudioSource:
   m_ObjectHideFlags: 0

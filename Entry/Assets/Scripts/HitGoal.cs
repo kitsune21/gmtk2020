@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class HitGoal : MonoBehaviour
 {
+    public float numOfSecondsToWaitTransition;
+    private bool startTimer;
+    private bool canTransitionNow;
+
+    private GameObject parentContainer;
+    private GameObject myBall;
+
     public string nextScene;
     // Start is called before the first frame update
     void Start()
@@ -32,6 +39,26 @@ public class HitGoal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (startTimer)
+        {
+            numOfSecondsToWaitTransition -= Time.deltaTime;
+        }
+        if(numOfSecondsToWaitTransition <= 0)
+        {
+            transitionScene();
+        }
+    }
+
+    private void transitionScene()
+    {
+        myBall.SetActive(true);
+        DontDestroyOnLoad(parentContainer);
+        SceneManager.LoadScene(nextScene);
+
+        GameObject[] playerObj = GameObject.FindGameObjectsWithTag("Player");
+        playerObj[0].GetComponent<PlayerController>().gotTheHole();
+        //disable player input
+        //display the score screen
     }
         
     private void OnTriggerEnter2D(Collider2D col)
@@ -39,9 +66,10 @@ public class HitGoal : MonoBehaviour
         if (col.gameObject.tag == "Ball")
         {
             // this holds the canvas and other objects
-            GameObject parentContainer = col.gameObject.transform.parent.gameObject.transform.parent.gameObject;
-            DontDestroyOnLoad(parentContainer);
-            SceneManager.LoadScene(nextScene);
+            parentContainer = col.gameObject.transform.parent.gameObject.transform.parent.gameObject;
+            startTimer = true;
+            myBall = col.gameObject;
+            myBall.SetActive(false);
         }
     }
 }

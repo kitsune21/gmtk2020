@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4566b0f1e785bf24799e9b33ed233f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numOfSecondsToWaitTransition: 2
   nextScene: MainMenu
 --- !u!82 &7813672210931178733
 AudioSource:
