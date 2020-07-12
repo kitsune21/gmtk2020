@@ -8,6 +8,7 @@ TagManager:
   - Mud
   - Ball
   - Goal
+  - parent
   layers:
   - Default
   - TransparentFX
