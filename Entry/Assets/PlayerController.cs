@@ -313,7 +313,7 @@ public class PlayerController : MonoBehaviour
         transform.position = myBall.transform.position;
         myBall.transform.SetParent(transform, true);
         myAnim.SetTrigger("ResetToIdle");
-        if(rageMeter.GetComponent<RageMeterController>().getRageLevel() == .3f)
+        if(rageMeter.GetComponent<RageMeterController>().getRageLevel() == 1f)
         {
             int livesCount = myLives.GetComponent<ClubController>().playerDied();
             if (livesCount <= 0)
