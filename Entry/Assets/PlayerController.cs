@@ -239,7 +239,7 @@ public class PlayerController : MonoBehaviour
             newCamPos = getRotation();
             newCamPos = new Vector3(newCamPos.x * 0.18f, newCamPos.y * 0.18f, mainCamera.transform.position.z);
             lerpTimer = 0;
-            moveCamera = true;
+            //moveCamera = true;
         }
     }
 
@@ -313,21 +313,24 @@ public class PlayerController : MonoBehaviour
         transform.position = myBall.transform.position;
         myBall.transform.SetParent(transform, true);
         myAnim.SetTrigger("ResetToIdle");
-        if(rageMeter.GetComponent<RageMeterController>().getRageLevel() == 1f)
+        if (!rageInControl)
         {
-            int livesCount = myLives.GetComponent<ClubController>().playerDied();
-            if (livesCount <= 0)
+            if (rageMeter.GetComponent<RageMeterController>().getRageLevel() >= 1f)
             {
-                // end the game
-                SceneManager.LoadScene("GameOver");
-            }
-            else if (!rageInControl)
-            {
-                //change the music
-                mainCameraAudio.clip = rageMusic;
-                mainCameraAudio.Play();
-                audioSource.PlayOneShot(rageInitYell);
-                rageInControl = true;
+                int livesCount = myLives.GetComponent<ClubController>().playerDied();
+                if (livesCount <= 0)
+                {
+                    // end the game
+                    SceneManager.LoadScene("GameOver");
+                }
+                else
+                {
+                    //change the music
+                    mainCameraAudio.clip = rageMusic;
+                    mainCameraAudio.Play();
+                    audioSource.PlayOneShot(rageInitYell);
+                    rageInControl = true;
+                }
             }
         }
         powerMeter.value = 0;
@@ -354,17 +357,25 @@ public class PlayerController : MonoBehaviour
 
     public void startHole()
     {
-        waitToStart = false;
-        strokesCount = 0;
         holeCount++;
-        if(holeCount == 1)
+        if (holeCount != 9)
         {
-            rageInstructions.SetActive(true);
+            waitToStart = false;
+            strokesCount = 0;
+            if (holeCount == 1)
+            {
+                rageInstructions.SetActive(true);
+            }
+            else
+            {
+                rageInstructions.SetActive(false);
+            }
+            startRelaxMeter();
         } else
         {
-            rageInstructions.SetActive(false);
+            strokeController.SetActive(false);
+            Destroy(gameObject);
         }
-        startRelaxMeter();
     }
 
     public void startRelaxMeter()
@@ -411,5 +422,10 @@ public class PlayerController : MonoBehaviour
         calmDownText.text = "Calmed Down: " + relaxAmount.ToString();
         secondsTillCalmDone = 0;
         mainCamera = Camera.main;
+    }
+
+    public int getHoleCount()
+    {
+        return holeCount;
     }
 }
