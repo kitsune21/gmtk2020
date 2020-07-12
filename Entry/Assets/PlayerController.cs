@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public int framesTillHitCount;
 
     public AudioClip[] sounds;
+    public AudioClip rageInitYell;
     private AudioSource audioSource;
 
     public AudioClip defaultMusic;
@@ -201,7 +202,14 @@ public class PlayerController : MonoBehaviour
 
     private void hitTheBall()
     {
-        myAnim.SetTrigger("SwingInit");
+        if (!rageInControl)
+        {
+            myAnim.SetTrigger("SwingInit");
+        }
+        else
+        {
+            myAnim.SetTrigger("RageSwing");
+        }
         framesTillHitCount = 0;
 
         strokesCount += 1;
@@ -220,13 +228,14 @@ public class PlayerController : MonoBehaviour
         transform.position = myBall.transform.position;
         myBall.transform.SetParent(transform, true);
         myAnim.SetTrigger("ResetToIdle");
-        if(rageMeter.GetComponent<RageMeterController>().getRageLevel() == 1f)
+        if(rageMeter.GetComponent<RageMeterController>().getRageLevel() == .3f)
         {
             myLives.GetComponent<ClubController>().playerDied();
             rageMeter.GetComponent<RageMeterController>().resetRage();
             //change the music
             mainCameraAudio.clip = rageMusic;
             mainCameraAudio.Play();
+            audioSource.PlayOneShot(rageInitYell);
             rageInControl = true;
         }
         powerMeter.value = 0;
