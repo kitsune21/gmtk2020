@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     public GameObject tempBallParent;
 
     private Animator myAnim;
+    private SpriteRenderer mySprite;
     public int framesTillHit;
     public int framesTillHitCount;
 
@@ -80,6 +81,7 @@ public class PlayerController : MonoBehaviour
     {
         disableInput = false;
         myAnim = GetComponentInChildren<Animator>();
+        mySprite = GetComponentInChildren<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         mainCameraAudio = GetComponent<AudioSource>();
         mainCameraAudio.clip = defaultMusic;
@@ -97,7 +99,42 @@ public class PlayerController : MonoBehaviour
     {
         if (!waitToStart)
         {
-            if (!disableInput)
+            if (!startPowerMeter)
+            {
+                // if rage is full, set a random rotation for the player and hit the ball a random power
+                if (rageInControl)
+                {
+                    var euler = transform.eulerAngles;
+                    euler.z = Random.Range(0.0f, 360.0f);
+                    transform.eulerAngles = euler;
+                    powerMeter.value = Random.Range(0.5f, 1f);
+                    stopPowerMeter();
+                }
+                if (Input.GetKey(KeyCode.A))
+                {
+                    transform.Rotate(0, 0, playerRotateAmount);                    
+                }
+                if (Input.GetKey(KeyCode.D))
+                {
+                    transform.Rotate(0, 0, -playerRotateAmount);
+                }
+                // use current rotation to find which side of the ball player is on
+                if (transform.rotation.z > -0.45f && transform.rotation.z < 0.4499f)
+                {
+                    myAnim.SetTrigger("RightOfBall");
+                    myAnim.ResetTrigger("LeftOfBall");
+                    mySprite.flipX = false;
+                    mySprite.flipY = false;
+                }
+                else
+                {
+                    myAnim.SetTrigger("LeftOfBall");
+                    myAnim.ResetTrigger("RightOfBall");
+                    mySprite.flipX = true;
+                    mySprite.flipY = true;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.W))
             {
                 if (!startPowerMeter)
                 {
@@ -156,6 +193,8 @@ public class PlayerController : MonoBehaviour
         }
         if (myBall.GetComponent<BallMoveController>().getBallHasStopped())
         {
+            // play a random grunt once the ball has stopped
+            audioSource.PlayOneShot(sounds[Random.Range(0, sounds.Length)]);
             if (myBall.GetComponent<BallMoveController>().getHitWater())
             {
                 Vector3 waterPos = myBall.GetComponent<BallMoveController>().getNewWaterPos();
@@ -296,7 +335,6 @@ public class PlayerController : MonoBehaviour
             myAnim.SetTrigger("RageSwing");
         }
         framesTillHitCount = 0;
-
         strokesCount += 1;
     }
 
