@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip rageInitYell;
     private AudioSource audioSource;
 
-    public AudioClip defaultMusic;
+    private AudioClip defaultMusic;
     public AudioClip rageMusic;
     public AudioSource mainCameraAudio;
 
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
         mySprite = GetComponentInChildren<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         mainCameraAudio = GetComponent<AudioSource>();
-        mainCameraAudio.clip = defaultMusic;
+        defaultMusic = mainCameraAudio.clip;
         mainCameraAudio.loop = true;
         mainCameraAudio.Play();
         displayControls.SetActive(true);
@@ -315,12 +315,14 @@ public class PlayerController : MonoBehaviour
         myAnim.SetTrigger("ResetToIdle");
         if (!rageInControl)
         {
-            if (rageMeter.GetComponent<RageMeterController>().getRageLevel() >= 1f)
+            if (rageMeter.GetComponent<RageMeterController>().getRageLevel() >= .1f)
             {
                 int livesCount = myLives.GetComponent<ClubController>().playerDied();
                 if (livesCount <= 0)
                 {
                     // end the game
+                    GameObject parentObject = GameObject.FindGameObjectWithTag("parent");
+                    Destroy(parentObject);
                     SceneManager.LoadScene("GameOver");
                 }
                 else
