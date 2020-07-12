@@ -46,6 +46,7 @@ public class RageMeterController : MonoBehaviour
 
     public void resetRage()
     {
+        Debug.Log("Test");
         rageMeter.value = 0;
         currentFace.sprite = face1;
     }

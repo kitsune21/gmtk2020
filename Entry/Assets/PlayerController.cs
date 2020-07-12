@@ -99,42 +99,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!waitToStart)
         {
-            if (!startPowerMeter)
-            {
-                // if rage is full, set a random rotation for the player and hit the ball a random power
-                if (rageInControl)
-                {
-                    var euler = transform.eulerAngles;
-                    euler.z = Random.Range(0.0f, 360.0f);
-                    transform.eulerAngles = euler;
-                    powerMeter.value = Random.Range(0.5f, 1f);
-                    stopPowerMeter();
-                }
-                if (Input.GetKey(KeyCode.A))
-                {
-                    transform.Rotate(0, 0, playerRotateAmount);                    
-                }
-                if (Input.GetKey(KeyCode.D))
-                {
-                    transform.Rotate(0, 0, -playerRotateAmount);
-                }
-                // use current rotation to find which side of the ball player is on
-                if (transform.rotation.z > -0.45f && transform.rotation.z < 0.4499f)
-                {
-                    myAnim.SetTrigger("RightOfBall");
-                    myAnim.ResetTrigger("LeftOfBall");
-                    mySprite.flipX = false;
-                    mySprite.flipY = false;
-                }
-                else
-                {
-                    myAnim.SetTrigger("LeftOfBall");
-                    myAnim.ResetTrigger("RightOfBall");
-                    mySprite.flipX = true;
-                    mySprite.flipY = true;
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.W))
+            if (!disableInput)
             {
                 if (!startPowerMeter)
                 {
@@ -170,17 +135,19 @@ public class PlayerController : MonoBehaviour
                             powerMeterObj.SetActive(true);
                             float sideOfCharacter = 0;
                             float modifyHeight = 0;
-                            if(transform.position.x > 5f)
+                            if (transform.position.x > 5f)
                             {
                                 sideOfCharacter = -1.5f;
-                            } else
+                            }
+                            else
                             {
                                 sideOfCharacter = 1.5f;
                             }
-                            if(transform.position.y > 2.5)
+                            if (transform.position.y > 2.5)
                             {
                                 modifyHeight = -0.7f;
-                            } else if (transform.position.y < 2.5f)
+                            }
+                            else if (transform.position.y < 2.5f)
                             {
                                 modifyHeight = 0.7f;
                             }
@@ -193,8 +160,6 @@ public class PlayerController : MonoBehaviour
         }
         if (myBall.GetComponent<BallMoveController>().getBallHasStopped())
         {
-            // play a random grunt once the ball has stopped
-            audioSource.PlayOneShot(sounds[Random.Range(0, sounds.Length)]);
             if (myBall.GetComponent<BallMoveController>().getHitWater())
             {
                 Vector3 waterPos = myBall.GetComponent<BallMoveController>().getNewWaterPos();
@@ -358,7 +323,6 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                rageMeter.GetComponent<RageMeterController>().resetRage();
                 //change the music
                 mainCameraAudio.clip = rageMusic;
                 mainCameraAudio.Play();
