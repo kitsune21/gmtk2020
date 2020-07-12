@@ -2325,7 +2325,7 @@ PrefabInstance:
         type: 3}
       propertyPath: rageMusic
       value: 
-      objectReference: {fileID: 8300000, guid: bdec19b075970a14d9c4b706c14adf38, type: 3}
+      objectReference: {fileID: 8300000, guid: abc3a5b5646804b438de92cb82141bbd, type: 3}
     - target: {fileID: 3550836287309400066, guid: ed49d6ec89cd17949b375f8a0c1baae2,
         type: 3}
       propertyPath: defaultMusic
@@ -2365,6 +2365,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550836286211561399, guid: ed49d6ec89cd17949b375f8a0c1baae2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550836286211561398, guid: ed49d6ec89cd17949b375f8a0c1baae2,
+        type: 3}
+      propertyPath: m_FlipX
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed49d6ec89cd17949b375f8a0c1baae2, type: 3}
@@ -4289,7 +4299,7 @@ Animator:
   m_GameObject: {fileID: 1345918452}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4cb5792121edb0e4e95344b80b6c4c2f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3a773b85d0e514f49808aaa6bc1cd36c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
