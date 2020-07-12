@@ -57,6 +57,12 @@ public class PlayerController : MonoBehaviour
     public float secondsTillCalmDone;
     public float secondsTillCalmDoneMax;
 
+    public Camera mainCamera;
+    public float lerpRange;
+    public float lerpTimer;
+    public float lertTimerMax;
+    private Vector3 newCamPos;
+    private bool moveCamera;
 
     // Start is called before the first frame update
     void Start()
@@ -99,16 +105,35 @@ public class PlayerController : MonoBehaviour
                 }
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-                    if (startPowerMeter)
+                    if (!startRelax)
                     {
-                        stopPowerMeter();
-                    }
-                    else
-                    {
-                        startPowerMeter = true;
-                        powerMeterObj.SetActive(true);
-                        Vector3 pos = new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z);
-                        powerMeterObj.transform.position = Camera.main.WorldToScreenPoint(pos);
+                        if (startPowerMeter)
+                        {
+                            stopPowerMeter();
+                        }
+                        else
+                        {
+                            startPowerMeter = true;
+                            powerMeterObj.SetActive(true);
+                            float sideOfCharacter = 0;
+                            float modifyHeight = 0;
+                            if(transform.position.x > 5f)
+                            {
+                                sideOfCharacter = -1.5f;
+                            } else
+                            {
+                                sideOfCharacter = 1.5f;
+                            }
+                            if(transform.position.y > 2.5)
+                            {
+                                modifyHeight = -0.7f;
+                            } else if (transform.position.y < 2.5f)
+                            {
+                                modifyHeight = 0.7f;
+                            }
+                            Vector3 pos = new Vector3(transform.position.x + sideOfCharacter, transform.position.y + modifyHeight, transform.position.z);
+                            powerMeterObj.transform.position = Camera.main.WorldToScreenPoint(pos);
+                        }
                     }
                 }
             }
@@ -163,6 +188,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         waitFramesTillHittingBall();
+        lerpCamera();
     }
 
     private void waitFramesTillHittingBall()
@@ -176,6 +202,30 @@ public class PlayerController : MonoBehaviour
             myBall.GetComponent<BallMoveController>().HitBall(getRotation(), getPowerMeterValue(), rageMeter.GetComponent<RageMeterController>().getRageLevel());
             myBall.transform.SetParent(tempBallParent.transform, true);
             framesTillHitCount += 1;
+            newCamPos = getRotation();
+            newCamPos = new Vector3(newCamPos.x * 0.18f, newCamPos.y * 0.18f, mainCamera.transform.position.z);
+            lerpTimer = 0;
+            moveCamera = true;
+        }
+    }
+
+    private void lerpCamera()
+    {
+        if (moveCamera)
+        {
+            if (lerpTimer < lertTimerMax)
+            {
+                lerpTimer += Time.deltaTime;
+                lerpRange += 1.1f * Time.deltaTime;
+                mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, newCamPos, lerpRange);
+
+            }
+            else if (lerpTimer >= lertTimerMax)
+            {
+                mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, new Vector3(0, 0, mainCamera.transform.position.z), 1);
+                lerpTimer = 10000;
+                moveCamera = false;
+            }
         }
     }
 
@@ -280,11 +330,11 @@ public class PlayerController : MonoBehaviour
         if (startRelax)
         {
             relaxMeter.GetComponentInChildren<Slider>().value += (float)relaxMeterDirection * increasePowerMeterAmount;
-            if (relaxMeter.GetComponentInChildren<Slider>().value >= 3.2f)
+            if (relaxMeter.GetComponentInChildren<Slider>().value >= relaxMeter.GetComponentInChildren<Slider>().maxValue)
             {
                 relaxMeterDirection = -1;
             }
-            else if (relaxMeter.GetComponentInChildren<Slider>().value <= 1)
+            else if (relaxMeter.GetComponentInChildren<Slider>().value <= relaxMeter.GetComponentInChildren<Slider>().minValue)
             {
                 relaxMeterDirection = 1;
             }
